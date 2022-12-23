@@ -1,20 +1,22 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened>Sidenav content</mat-sidenav>
+    <mat-sidenav #sidenav>Sidenav content</mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color="primary" class="d-flex flex-column">
             <span class="w-100 d-flex m-auto mx-1rem">
                 <div>
-                    <button mat-icon-button (click)="sidenav.toggle()">
+                    <button mat-icon-button (click)="sidenav.toggle()" class="show-on-small-screens">
                         <mat-icon>menu</mat-icon>
                     </button>
                 </div>
                 <div class="d-flex align-center">
-                    LOGO
+                    <a routerLink="/"><img src="../logo.svg" alt=" LOGO"></a>
                 </div>
-                <div class="d-flex flex-1 justify-content-end">
-                    <a class="d-flex align-center" routerLink="/signup">Signup</a>
-                    <a class="d-flex align-center" routerLink="/login">Login</a>
-                    <a class="d-flex align-center" routerLink="/training">Training</a>
+                <div class="flex-1 justify-content-end show-on-medium-screens">
+                    <ul class="d-flex flex-row navigation-items">
+                        <li><a class="d-flex align-center" routerLink="/signup">Signup</a></li>
+                        <li><a class="d-flex align-center" routerLink="/login">Login</a></li>
+                        <li><a class="d-flex align-center" routerLink="/training">Training</a></li>
+                    </ul>
                 </div>
             </span>
         </mat-toolbar>
