@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
-
 html,
 body {
     height: 100%;
@@ -12,6 +10,92 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-d-flex {
+.d-flex {
     display: flex !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.d-inline-block {
+    display: inline-block !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.justify-content-start {
+    justify-content: flex-end;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.align-top {
+    align-items: flex-start;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-bottom {
+    align-items: flex-end;
+}
+
+.vetical-align-middle {
+    vertical-align: middle;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.mx-1rem {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.ms-1rem {
+    margin-left: 1rem;
+}
+
+.me-1rem {
+    margin-right: 1rem;
+}
+
+.px-1rem {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.ps-1rem {
+    padding-left: 1rem;
+}
+
+.pe-1rem {
+    padding-right: 1rem;
 }
