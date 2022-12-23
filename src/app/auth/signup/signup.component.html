@@ -1,13 +1,18 @@
 <section>
-    <form>
-        <mat-form-field class="example-full-width">
+    <form class="flexform" #ref="ngForm" (ngSubmit)="onSubmit(ref)">
+        <mat-form-field class="example-full-width" hintLabel="">
             <mat-label>E-mail</mat-label>
-            <input type="email" matInput placeholder="Your E-mail">
+            <input type="email" matInput placeholder="Your E-mail" ngModel name="email" email required>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
+        <mat-form-field class="example-full-width" hintLabel="Should be at least 8 characters long">
             <mat-label>Password</mat-label>
-            <input type="password" matInput placeholder="Your password">
+            <input type="password" matInput placeholder="Your password" ngModel name="password" minlength="8" required
+                #pwInput="ngModel">
+            <mat-hint align="end"> {{ pwInput.value?.length }} / 8</mat-hint>
+            <!-- <mat-hint>Should be at least 8 characters long</mat-hint> -->
         </mat-form-field>
+
+        <button mat-raised-button color="primary">Submit</button>
     </form>
 </section>
