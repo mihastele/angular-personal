@@ -2,7 +2,11 @@
     <form class="flexform" #ref="ngForm" (ngSubmit)="onSubmit(ref)">
         <mat-form-field class="example-full-width" hintLabel="">
             <mat-label>E-mail</mat-label>
-            <input type="email" matInput placeholder="Your E-mail" ngModel name="email" email required>
+            <input type="email" matInput placeholder="Your E-mail" ngModel name="email" email required
+                #emailInput="ngModel">
+            <mat-hint>Your e-mail address</mat-hint>
+            <mat-error *ngIf="emailInput.hasError('required')">E-mail is required</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">E-mail is invalid</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" hintLabel="Should be at least 8 characters long">
@@ -10,9 +14,21 @@
             <input type="password" matInput placeholder="Your password" ngModel name="password" minlength="8" required
                 #pwInput="ngModel">
             <mat-hint align="end"> {{ pwInput.value?.length }} / 8</mat-hint>
+            <mat-error>Password is too short</mat-error>
             <!-- <mat-hint>Should be at least 8 characters long</mat-hint> -->
         </mat-form-field>
 
-        <button mat-raised-button color="primary">Submit</button>
+        <mat-form-field appearance="fill">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" ngModel name="birthdate" required>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-checkbox>I agree to the Code of Conduct.</mat-checkbox>
+
+
+        <button mat-raised-button color="primary" [disabled]="ref.invalid">Submit</button>
     </form>
 </section>
