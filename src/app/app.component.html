@@ -1,5 +1,27 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav>Sidenav content</mat-sidenav>
+    <mat-sidenav #sidenav>
+        <mat-list role="list">
+            <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/signup">
+                <div class="d-flex flex-row align-center">
+                    <mat-icon>face</mat-icon><span class="navigation-caption">Signup</span>
+                </div>
+            </a>
+            <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/login">
+                <div class="d-flex flex-row align-center">
+                    <mat-icon>input</mat-icon><span class="navigation-caption">Login</span>
+                </div>
+            </a>
+            <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/training">
+                <div class="d-flex flex-row align-center">
+                    <mat-icon>fitness_center</mat-icon><span class="navigation-caption">Training</span>
+                </div>
+            </a>
+            <!-- <mat-list-item role="listitem">Item 1</mat-list-item>
+            <mat-list-item role="listitem">Item 2</mat-list-item>
+            <mat-list-item role="listitem">Item 3</mat-list-item> -->
+        </mat-list>
+
+    </mat-sidenav>
     <mat-sidenav-content>
         <mat-toolbar color="primary" class="d-flex flex-column">
             <span class="w-100 d-flex m-auto mx-1rem">
