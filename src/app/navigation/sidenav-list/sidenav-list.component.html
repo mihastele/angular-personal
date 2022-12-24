@@ -1,12 +1,12 @@
 <mat-list role="list">
-    <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/signup"
-        (click)="onClose()">
+    <a *ngIf="!isAuth" mat-list-item class="d-flex align-center mlism white-text-children align-center"
+        routerLink="/signup" (click)="onClose()">
         <div class="d-flex flex-row align-center">
             <mat-icon>face</mat-icon><span class="navigation-caption">Signup</span>
         </div>
     </a>
-    <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/login"
-        (click)="onClose() ">
+    <a *ngIf="!isAuth" mat-list-item class="d-flex align-center mlism white-text-children align-center"
+        routerLink="/login" (click)="onClose() ">
         <div class="d-flex flex-row align-center">
             <mat-icon>input</mat-icon><span class="navigation-caption">Login</span>
         </div>
@@ -17,7 +17,8 @@
             <mat-icon>fitness_center</mat-icon><span class="navigation-caption">Training</span>
         </div>
     </a>
-    <a mat-list-item class="d-flex align-center mlism white-text-children align-center" (click)="onClose() ">
+    <a *ngIf="isAuth" mat-list-item class="d-flex align-center mlism white-text-children align-center"
+        (click)="onClose() ">
         <div class="d-flex flex-row align-center">
             <mat-icon>logout</mat-icon><span class="navigation-caption">Logout</span>
         </div>
