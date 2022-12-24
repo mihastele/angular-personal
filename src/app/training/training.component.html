@@ -1,4 +1,4 @@
-<app-current-training *ngIf="onGoingTraining">
+<app-current-training *ngIf="onGoingTraining" (trainingExit)="onGoingTraining = false">
 </app-current-training>
 
 <mat-tab-group *ngIf="!onGoingTraining">
