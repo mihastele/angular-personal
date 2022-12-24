@@ -179,6 +179,14 @@ body {
 
 /* global definitions*/
 
+.flexform {
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (min-width: 992px) {
     .show-on-medium-screens {
         display: flex;
