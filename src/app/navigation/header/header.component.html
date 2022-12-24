@@ -13,7 +13,8 @@
                 <li *ngIf="!isAuth"><a class="d-flex align-center" routerLink="/signup">Signup</a></li>
                 <li *ngIf="!isAuth"><a class="d-flex align-center" routerLink="/login">Login</a></li>
                 <li><a class="d-flex align-center" routerLink="/training">Training</a></li>
-                <li *ngIf="isAuth"><a class="d-flex align-center">Logout</a></li>
+                <li style="cursor: pointer;" *ngIf="isAuth" (click)="onLogout()"><a
+                        class="d-flex align-center">Logout</a></li>
             </ul>
         </div>
     </span>
