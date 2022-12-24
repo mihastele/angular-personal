@@ -1,18 +1,18 @@
-<section class="new training d-flex justify-content-center">
+<section class="new training d-flex justify-content-center my-1rem">
     <mat-card class="d-flex justify-content-center px-1rem py-1rem justify-content-center w-100 card-big-screen-limit">
         <mat-card-title class="d-flex pb-1rem justify-content-center">
             <span class="px-0">
                 Time to start a workout!
             </span>
         </mat-card-title>
-        <mat-card-content class="py-1rem px-0">
+        <!--<mat-card-content class="py-1rem px-0">
             <span class="d-flex flex-0 px-0 justify-content-center">
                 Select type of training
-            </span>
-        </mat-card-content>
+            </span> 
+        </mat-card-content>-->
         <mat-form-field appearance="fill">
             <span class="d-flex flex-0 px-0 justify-content-center">
-                <mat-label>Favorite food</mat-label>
+                <mat-label>Select type of training</mat-label>
             </span>
             <mat-select><!-- *ngFor="let food of foods">-->
                 <mat-option value="1">
@@ -25,7 +25,7 @@
         </mat-form-field>
         <mat-card-actions class="d-flex justify-content-center">
             <span class="d-flex flex-0 px-0">
-                <button mat-raised-button>START</button>
+                <button mat-raised-button color="primary" (click)="onStartTraining()">START</button>
             </span>
         </mat-card-actions>
     </mat-card>
