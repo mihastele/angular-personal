@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" class="d-flex flex-column">
+    <span class="w-100 d-flex m-auto mx-1rem">
+        <div>
+            <button mat-icon-button (click)="onToggleSidenav()" class="show-on-small-screens">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+        <div class="d-flex align-center">
+            <a routerLink="/"><img src="../logo.svg" alt=" LOGO"></a>
+        </div>
+        <div class="flex-1 justify-content-end show-on-medium-screens">
+            <ul class="d-flex flex-row navigation-items">
+                <li><a class="d-flex align-center" routerLink="/signup">Signup</a></li>
+                <li><a class="d-flex align-center" routerLink="/login">Login</a></li>
+                <li><a class="d-flex align-center" routerLink="/training">Training</a></li>
+                <li><a class="d-flex align-center">Logout</a></li>
+            </ul>
+        </div>
+    </span>
+</mat-toolbar>

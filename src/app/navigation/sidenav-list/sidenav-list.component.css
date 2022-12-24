@@ -1,0 +1,17 @@
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+a:hover {
+    color: #c2c2c2;
+}
+
+a:active {
+    color: #a2a2a2;
+}
+
+.navigation-caption {
+    display: inline-block;
+    padding-left: 0.3rem;
+}

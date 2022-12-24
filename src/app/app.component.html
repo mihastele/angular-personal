@@ -1,47 +1,9 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav>
-        <mat-list role="list">
-            <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/signup">
-                <div class="d-flex flex-row align-center">
-                    <mat-icon>face</mat-icon><span class="navigation-caption">Signup</span>
-                </div>
-            </a>
-            <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/login">
-                <div class="d-flex flex-row align-center">
-                    <mat-icon>input</mat-icon><span class="navigation-caption">Login</span>
-                </div>
-            </a>
-            <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/training">
-                <div class="d-flex flex-row align-center">
-                    <mat-icon>fitness_center</mat-icon><span class="navigation-caption">Training</span>
-                </div>
-            </a>
-            <!-- <mat-list-item role="listitem">Item 1</mat-list-item>
-            <mat-list-item role="listitem">Item 2</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item> -->
-        </mat-list>
-
+        <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <mat-toolbar color="primary" class="d-flex flex-column">
-            <span class="w-100 d-flex m-auto mx-1rem">
-                <div>
-                    <button mat-icon-button (click)="sidenav.toggle()" class="show-on-small-screens">
-                        <mat-icon>menu</mat-icon>
-                    </button>
-                </div>
-                <div class="d-flex align-center">
-                    <a routerLink="/"><img src="../logo.svg" alt=" LOGO"></a>
-                </div>
-                <div class="flex-1 justify-content-end show-on-medium-screens">
-                    <ul class="d-flex flex-row navigation-items">
-                        <li><a class="d-flex align-center" routerLink="/signup">Signup</a></li>
-                        <li><a class="d-flex align-center" routerLink="/login">Login</a></li>
-                        <li><a class="d-flex align-center" routerLink="/training">Training</a></li>
-                    </ul>
-                </div>
-            </span>
-        </mat-toolbar>
+        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
         <main>
             <router-outlet></router-outlet>
         </main>
