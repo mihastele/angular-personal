@@ -1,4 +1,7 @@
-<section class="d-flex flex-column align-center">
-    <mat-progress-spinner class="d-flex" mode="determinate" value="20">
+<section class="current-training d-flex flex-column align-center">
+    <mat-progress-spinner class="d-flex" mode="determinate" [value]="progress">
     </mat-progress-spinner>
+    <h1>{{ progress }}%</h1>
+    <p>Keep on going, you can do it!</p>
+    <button mat-raised-button (click)="onStopTimer()">STOP</button>
 </section>
