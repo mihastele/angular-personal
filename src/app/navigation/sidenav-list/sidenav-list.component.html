@@ -11,8 +11,8 @@
             <mat-icon>input</mat-icon><span class="navigation-caption">Login</span>
         </div>
     </a>
-    <a mat-list-item class="d-flex align-center mlism white-text-children align-center" routerLink="/training"
-        (click)="onClose() ">
+    <a *ngIf="isAuth" mat-list-item class="d-flex align-center mlism white-text-children align-center"
+        routerLink="/training" (click)="onClose() ">
         <div class="d-flex flex-row align-center">
             <mat-icon>fitness_center</mat-icon><span class="navigation-caption">Training</span>
         </div>
