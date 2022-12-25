@@ -6,6 +6,7 @@ import { User } from "./user.model";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { TrainingService } from "../training/training.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { UIService } from "../shared/ui.service";
 
 
 //rxjs is an event emitter for services and non angular components
@@ -17,7 +18,7 @@ export class AuthService {
     constructor(private router: Router,
         private auth: AngularFireAuth,
         private trainingService: TrainingService,
-        private snackBar: MatSnackBar) {
+        private uiService: UIService) {
     }
 
     initAuthListener() {
@@ -36,23 +37,26 @@ export class AuthService {
     }
 
     registerUser(authData: AuthData) {
+        this.uiService.loadingStateChanged.next(true);
         this.auth.createUserWithEmailAndPassword(authData.email, authData.password).then(result => {
+            this.uiService.loadingStateChanged.next(false);
         }).catch(error => {
             // 'Error, please check your data or contact administrator'
-            this.snackBar.open(error.message, null, {
-                duration: 3000
-            })
+            this.uiService.showSnackbar(error.message, null, 3000)
+            this.uiService.loadingStateChanged.next(false);
         })
     }
 
 
     login(authData: AuthData) {
+        this.uiService.loadingStateChanged.next(true);
         this.auth.signInWithEmailAndPassword(authData.email, authData.password).then(result => {
+            this.uiService.loadingStateChanged.next(false);
         }).catch(error => {
             // 'Error, most likely invalid credentials'
-            this.snackBar.open(error.message, null, {
-                duration: 3000
-            })
+            this.uiService.loadingStateChanged.next(false);
+            this.uiService.showSnackbar(error.message, null, 3000
+            )
         })
     }
 

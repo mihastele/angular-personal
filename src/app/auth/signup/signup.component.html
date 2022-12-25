@@ -29,6 +29,7 @@
         <mat-checkbox ngModel name="agree" required color="primary">I agree to the Code of Conduct.</mat-checkbox>
 
 
-        <button mat-raised-button color="primary" [disabled]="ref.invalid">Submit</button>
+        <button *ngIf="!isLoading" mat-raised-button color="primary" [disabled]="ref.invalid">Submit</button>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
     </form>
 </section>
