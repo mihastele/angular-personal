@@ -9,6 +9,7 @@ export class TrainingService {
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
     private runningExercise: Exercise;
+    private exercises: Exercise[] = []
     exerciseChanged = new Subject<Exercise>();
 
     getAvailableExercises() {
@@ -22,6 +23,22 @@ export class TrainingService {
 
     getRunningExercise() {
         return { ...this.runningExercise }
+    }
+
+    completeExercise() {
+        this.exercises.push({ ...this.runningExercise, date: new Date(), state: 'completed' }) // spread operator + extra data
+        this.runningExercise = null
+        this.exerciseChanged.next(null)
+    }
+
+    cancelExercise(progress: number) {
+        this.exercises.push({ ...this.runningExercise, date: new Date(), state: 'cancelled', duration: this.runningExercise.duration * (progress / 100), calories: this.runningExercise.calories * (progress / 100) }) // spread operator + extra data
+        this.runningExercise = null
+        this.exerciseChanged.next(null)
+    }
+
+    getExercises() {
+        return this.exercises.slice()
     }
 }
 
