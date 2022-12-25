@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { AuthData } from "./auth-data-model";
 import { User } from "./user.model";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 
 //rxjs is an event emitter for services and non angular components
@@ -11,16 +12,16 @@ export class AuthService {
     private user: User
     authChange = new Subject<boolean>();
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private auth: AngularFireAuth) {
     }
 
     registerUser(authData: AuthData) {
-        this.user = {
-            email: authData.email,
-            userId: Math.round(Math.random() * 100000).toString() // fake for now
-        }
-        // this.authChange.next(true); // boolean payload as defined in the Type
-        this.authSuccessfully()
+        this.auth.createUserWithEmailAndPassword(authData.email, authData.password).then(result => {
+            console.log(result)
+            this.authSuccessfully()
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
 

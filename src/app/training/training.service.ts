@@ -7,9 +7,11 @@ import { Exercise } from "./exercise.model";
 export class TrainingService {
     private availableExercises: Exercise[] = [];
     private runningExercise: Exercise;
-    private exercises: Exercise[] = []
+    // private finishedExercises: Exercise[] = []
+    // private exercises: Exercise[] = []
     exerciseChanged = new Subject<Exercise>();
     exercisesChanged = new Subject<Exercise[]>();
+    finishedExercisesChanged = new Subject<Exercise[]>();
 
     constructor(private db: AngularFirestore) {
 
@@ -32,6 +34,7 @@ export class TrainingService {
     }
 
     startExercise(selectedId: string) {
+        // this.db.doc('availableExercises/' + selectedId).update({ lastSelected: new Date() }) // update without override
         this.runningExercise = this.availableExercises.find(ex => ex.id === selectedId)
         this.exerciseChanged.next({ ...this.runningExercise });
     }
@@ -41,19 +44,27 @@ export class TrainingService {
     }
 
     completeExercise() {
-        this.exercises.push({ ...this.runningExercise, date: new Date(), state: 'completed' }) // spread operator + extra data
+        this.addDataToDatabase({ ...this.runningExercise, date: new Date(), state: 'completed' }) // spread operator + extra data
         this.runningExercise = null
         this.exerciseChanged.next(null)
     }
 
     cancelExercise(progress: number) {
-        this.exercises.push({ ...this.runningExercise, date: new Date(), state: 'cancelled', duration: this.runningExercise.duration * (progress / 100), calories: this.runningExercise.calories * (progress / 100) }) // spread operator + extra data
+        this.addDataToDatabase({ ...this.runningExercise, date: new Date(), state: 'cancelled', duration: this.runningExercise.duration * (progress / 100), calories: this.runningExercise.calories * (progress / 100) }) // spread operator + extra data
         this.runningExercise = null
         this.exerciseChanged.next(null)
     }
 
-    getExercises() {
-        return this.exercises.slice()
+    fetchExercises() {
+        this.db.collection("finishedExercises").valueChanges().subscribe((exercises: Exercise[]) => {
+            // this.finishedExercises = exercises
+            this.finishedExercisesChanged.next(exercises)
+        });
+        // return this.exercises.slice()
+    }
+
+    private addDataToDatabase(exercise: Exercise) {
+        this.db.collection('finishedExercises').add(exercise)
     }
 }
 

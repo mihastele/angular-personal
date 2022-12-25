@@ -26,7 +26,7 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-checkbox>I agree to the Code of Conduct.</mat-checkbox>
+        <mat-checkbox ngModel name="agree" required color="primary">I agree to the Code of Conduct.</mat-checkbox>
 
 
         <button mat-raised-button color="primary" [disabled]="ref.invalid">Submit</button>
