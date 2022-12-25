@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UIService } from 'src/app/shared/ui.service';
 import { AuthService } from '../auth.service';
+import * as fromApp from '../../app.reducer'
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +17,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   private loadingSubs: Subscription;
 
 
-  constructor(private authService: AuthService, private uiService: UIService) {
+  constructor(private authService: AuthService,
+    private uiService: UIService,
+    private store: Store) {
   }
 
   ngOnInit() {
