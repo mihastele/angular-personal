@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import { AuthData } from "./auth-data-model";
 import { User } from "./user.model";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { TrainingService } from "../training/training.service";
 
 
 //rxjs is an event emitter for services and non angular components
@@ -12,13 +13,26 @@ export class AuthService {
     private isAuthenticated: boolean
     authChange = new Subject<boolean>();
 
-    constructor(private router: Router, private auth: AngularFireAuth) {
+    constructor(private router: Router, private auth: AngularFireAuth, private trainingService: TrainingService) {
+    }
+
+    initAuthListener() {
+        this.auth.authState.subscribe(user => {
+            if (user) {
+                this.isAuthenticated = true
+                this.authChange.next(true);
+                this.router.navigate(['/training'])
+            } else {
+                this.trainingService.cancelSubscriptions()
+                this.authChange.next(false);
+                this.router.navigate(['/login'])
+                this.isAuthenticated = false
+            }
+        });
     }
 
     registerUser(authData: AuthData) {
         this.auth.createUserWithEmailAndPassword(authData.email, authData.password).then(result => {
-            console.log(result)
-            this.authSuccessfully()
         }).catch(error => {
             console.log(error)
         })
@@ -27,8 +41,6 @@ export class AuthService {
 
     login(authData: AuthData) {
         this.auth.signInWithEmailAndPassword(authData.email, authData.password).then(result => {
-            console.log(result)
-            this.authSuccessfully()
         }).catch(error => {
             console.log(error)
         })
@@ -36,19 +48,11 @@ export class AuthService {
 
     logout() {
         this.auth.signOut()
-        this.authChange.next(false);
-        this.router.navigate(['/signup'])
     }
-
 
 
     isAuth() {
         return this.isAuthenticated
     }
 
-    private authSuccessfully() {
-        this.isAuthenticated = true
-        this.authChange.next(true);
-        this.router.navigate(['/training'])
-    }
 }
