@@ -27,10 +27,17 @@ export class TrainingService {
                     ...(d.payload.doc.data() as Object)
                 }
             })
-        })).subscribe((exercises: Exercise[]) => {
-            this.availableExercises = exercises
-            this.exercisesChanged.next([...this.availableExercises])
-        })
+        })).subscribe(
+            {
+                next: (exercises: Exercise[]) => {
+                    this.availableExercises = exercises
+                    this.exercisesChanged.next([...this.availableExercises])
+                }, error: error => {
+                    //console.log(error)
+                }
+            }
+
+        )
     }
 
     startExercise(selectedId: string) {
@@ -56,10 +63,16 @@ export class TrainingService {
     }
 
     fetchExercises() {
-        this.db.collection("finishedExercises").valueChanges().subscribe((exercises: Exercise[]) => {
-            // this.finishedExercises = exercises
-            this.finishedExercisesChanged.next(exercises)
-        });
+        this.db.collection("finishedExercises").valueChanges().subscribe({
+            next: (exercises: Exercise[]) => {
+                // this.finishedExercises = exercises
+                this.finishedExercisesChanged.next(exercises)
+            },
+            error: error => {
+                //console.log(error)
+            }
+        })
+
         // return this.exercises.slice()
     }
 
