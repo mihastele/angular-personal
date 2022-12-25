@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../material.module";
+import { AuthRoutingModule } from "./auth-routing.module";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 
@@ -13,12 +14,13 @@ import { SignupComponent } from "./signup/signup.component";
         SignupComponent,
         LoginComponent
     ],
-    imports: [AngularFireAuthModule,
+    imports: [
+        AngularFireAuthModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule],
-    exports: []
+        MaterialModule,
+        AuthRoutingModule]
 })
 export class AuthModule {
 
