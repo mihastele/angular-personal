@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from "@ngrx/store";
+import * as fromRoot from '../../app.reducer'
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -7,22 +9,18 @@ import { AuthService } from 'src/app/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>(); // Output is used to be listenable from outside
-  isAuth: boolean
+  isAuth$: Observable<boolean>
   subscriptionToAuth: Subscription
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private store: Store) {
   }
 
   ngOnInit() {
-    this.subscriptionToAuth = this.authService.authChange.subscribe(authStatus => {
-      this.isAuth = authStatus
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptionToAuth.unsubscribe() // clear unneeded memory
+    this.isAuth$ = this.store.select(fromRoot.getIsAuth)
   }
 
   onLogout() {

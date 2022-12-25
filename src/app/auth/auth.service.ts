@@ -9,13 +9,14 @@ import { UIService } from "../shared/ui.service";
 import { Store } from "@ngrx/store";
 import * as fromRoot from '../app.reducer'
 import * as UI from '../shared/ui.actions'
+import * as Auth from './auth.actions'
 
 
 //rxjs is an event emitter for services and non angular components
 @Injectable() // used to inject other services to this service since it is not an angular component
 export class AuthService {
-    private isAuthenticated: boolean
-    authChange = new Subject<boolean>();
+    // private isAuthenticated: boolean
+    // authChange = new Subject<boolean>();
 
     constructor(private router: Router,
         private auth: AngularFireAuth,
@@ -27,14 +28,16 @@ export class AuthService {
     initAuthListener() {
         this.auth.authState.subscribe(user => {
             if (user) {
-                this.isAuthenticated = true
-                this.authChange.next(true);
+                // this.isAuthenticated = true
+                // this.authChange.next(true);
+                this.store.dispatch(new Auth.SetAuthenticated())
                 this.router.navigate(['/training'])
             } else {
                 this.trainingService.cancelSubscriptions()
-                this.authChange.next(false);
+                this.store.dispatch(new Auth.SetUnauthenticated())
+                // this.isAuthenticated = false
+                // this.authChange.next(false);
                 this.router.navigate(['/login'])
-                this.isAuthenticated = false
             }
         });
     }
@@ -73,9 +76,5 @@ export class AuthService {
         this.auth.signOut()
     }
 
-
-    isAuth() {
-        return this.isAuthenticated
-    }
 
 }

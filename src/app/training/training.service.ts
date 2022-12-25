@@ -4,6 +4,8 @@ import { Subject, map, Subscription } from "rxjs";
 import { UIService } from "../shared/ui.service";
 import { Exercise } from "./exercise.model";
 
+import * as fromRoot from '../app.reducer'
+
 @Injectable()
 export class TrainingService {
     private availableExercises: Exercise[] = []

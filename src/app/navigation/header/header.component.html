@@ -12,10 +12,10 @@
         </div>
         <div class="flex-1 justify-content-end show-on-medium-screens">
             <ul class="d-flex flex-row navigation-items">
-                <li *ngIf="!isAuth"><a class="d-flex align-center" routerLink="/signup">Signup</a></li>
-                <li *ngIf="!isAuth"><a class="d-flex align-center" routerLink="/login">Login</a></li>
-                <li *ngIf="isAuth"><a class="d-flex align-center" routerLink="/training">Training</a></li>
-                <li style="cursor: pointer;" *ngIf="isAuth" (click)="onLogout()"><a
+                <li *ngIf="!(isAuth$ | async)"><a class="d-flex align-center" routerLink="/signup">Signup</a></li>
+                <li *ngIf="!(isAuth$ | async)"><a class="d-flex align-center" routerLink="/login">Login</a></li>
+                <li *ngIf="isAuth$ | async"><a class="d-flex align-center" routerLink="/training">Training</a></li>
+                <li style="cursor: pointer;" *ngIf="isAuth$ | async" (click)="onLogout()"><a
                         class="d-flex align-center">Logout</a></li>
             </ul>
         </div>
