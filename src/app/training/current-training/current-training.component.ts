@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
 import * as fromTraining from '../training.reducer'
 import { TrainingService } from '../training.service';
 
@@ -18,7 +19,7 @@ export class CurrentTrainingComponent implements OnInit {
   timer: ReturnType<typeof setInterval>
 
   initInterval = () => {
-    this.store.select(fromTraining.getActiveTraining).subscribe(exercise => {
+    this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(exercise => {
 
       const step = exercise.duration * 10// (10 -> 1000/100%)
       this.timer = setInterval(() => {
